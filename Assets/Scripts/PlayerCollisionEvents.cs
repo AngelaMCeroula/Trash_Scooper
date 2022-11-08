@@ -4,16 +4,31 @@ using UnityEngine;
 
 public class PlayerCollisionEvents : MonoBehaviour
 {
+    
+    
+    
+  // Trigger collision events 
   
-    private void OnCollisionEnter2D(Collision2D collision) // When player collides
+    private void OnTriggerEnter2D(Collider2D colTrigger) // When player collides
     {
-        if (collision.gameObject.tag == "Trash") // if player collides with game objects tagged Trash
+
+        if (colTrigger.gameObject.CompareTag("Animal"))
         {
-            Debug.Log("You have picked up some trash");
+            Debug.Log("wot wot");
+            ScoreManager.instance.AddPointAnimal();
+            Destroy(colTrigger.gameObject);
+            
+        }
+        
+        if (colTrigger.gameObject.CompareTag("Trash"))
+        {
+            Debug.Log("some more trash");
             //UpdateUI
             ScoreManager.instance.AddPoint();
+            Destroy(colTrigger.gameObject);
         }
-            
+        
     }
+    
     
 }

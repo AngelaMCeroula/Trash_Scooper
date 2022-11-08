@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerControler : MonoBehaviour
 {
+    // Thank you Assad for this beautiful player controller script
+    
     private Rigidbody2D _rb;
     public float moveSpeed;
     public float jumpForce;
