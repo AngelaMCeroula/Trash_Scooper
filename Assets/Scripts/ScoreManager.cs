@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class ScoreManager : MonoBehaviour
@@ -15,8 +16,9 @@ public class ScoreManager : MonoBehaviour
     //public TMP_Text ScoreText;
     //public TMP_Text HighsccoreText;
     
-    int score = 0;
-    int highscore = 0;
+    public static int score = 0;
+    public static int highscore = 0;
+    
 
     private void Awake()
     {
@@ -28,8 +30,13 @@ public class ScoreManager : MonoBehaviour
     void Start()
     { 
         highscore = PlayerPrefs.GetInt("highscore", 0);
-        scoreText.text = score.ToString() + " POINTS";
-        highscoreText.text = "HIGHSCORE: " + highscore.ToString();
+        scoreText.text = score.ToString();
+        highscoreText.text = highscore.ToString();
+
+        if (instance == null)
+        {
+            instance = this;
+        }
 
     }
 
@@ -37,8 +44,16 @@ public class ScoreManager : MonoBehaviour
     {
        
         //adds points to the score text, must be referenced on trash items script "ScoreManager.instance.AddPoint();"
+        if (CompareTag("Trash"))
+        {
+            Debug.Log(" you got 1 point");
+
+        }
         score += 1;
-        scoreText.text = score.ToString() + " POINTS";
+        scoreText.text = score.ToString();
+        
+       
+        
         
         //saves highscore
         if (highscore < score)
@@ -53,7 +68,7 @@ public class ScoreManager : MonoBehaviour
        
         //adds points to the score text, must be referenced on trash items script "ScoreManager.instance.AddPoint();"
         score += 10;
-        scoreText.text = score.ToString() + " POINTS";
+        scoreText.text = score.ToString();
         
         //saves highscore
         if (highscore < score)
@@ -62,6 +77,41 @@ public class ScoreManager : MonoBehaviour
         }
         
 
+    }
+    
+    public void AddPointPile()
+    {
+       
+        //adds points to the score text, must be referenced on trash items script "ScoreManager.instance.AddPoint();"
+        score += 5;
+        scoreText.text = score.ToString();
+
+        HScore();
+        
+    }
+
+    public void HScore()
+    { if (highscore < score)
+        { 
+            PlayerPrefs.SetInt("highscore", score);
+        }
+        
+    }
+
+    
+    public void PointMultiplier()
+    {
+        score *= 2;
+        scoreText.text = score.ToString();
+        // add text and a delay
+        Invoke(nameof(ScenePlayDelay), 1);
+        HScore();
+        
+    }
+
+    public void ScenePlayDelay()
+    {
+        SceneManager.LoadScene("FinalMenu");
     }
 
 

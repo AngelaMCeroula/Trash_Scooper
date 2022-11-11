@@ -8,6 +8,9 @@ TagManager:
   - Wall
   - Trash
   - Animal
+  - Score
+  - Coins
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -15,9 +18,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Animal
+  - Trash
   - 
   - 
   - 

@@ -25,7 +25,7 @@ public class timer : MonoBehaviour
         if (currentTime <= 0)
         {
             currentTime = 0;
-            SceneManager.LoadScene("FinalScore");
+            SceneManager.LoadScene("FinalMenu");
         }
 
     }
